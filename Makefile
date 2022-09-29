@@ -44,10 +44,13 @@ LDFLAGS = -L. -L$(LIBDIR)
 LDLIBS = -lgb
 LOADLIBES = $(LDLIBS)
 
-.SUFFIXES: .dvi .tex .w
+.SUFFIXES: .dvi .tex .w .pdf
 
 .tex.dvi:
 	tex $*.tex
+
+.tex.pdf:
+	pdftex $*.tex
 
 .w.c:
 	if test -r $*.ch; then ctangle $*.w $*.ch; else ctangle $*.w; fi
@@ -66,6 +69,10 @@ LOADLIBES = $(LDLIBS)
 .w.dvi:
 	make $*.tex
 	make $*.dvi
+
+.w.pdf:
+	make $*.tex
+	make $*.pdf
 
 DATAFILES = anna.dat david.dat econ.dat games.dat homer.dat huck.dat \
         jean.dat lisa.dat miles.dat roget.dat words.dat
@@ -86,6 +93,8 @@ ALL = $(DATAFILES) $(KERNELFILES) $(GENERATORFILES) $(DEMOFILES) \
 OBJS = $(KERNELFILES:.w=.o) $(GENERATORFILES:.w=.o) gb_dijk.o gb_save.o
 HEADERS = $(OBJS:.o=.h)
 DEMOS = $(DEMOFILES:.w=)
+
+PDFS = $(KERNELFILES:.w=.pdf) $(GENERATORFILES:.w=.pdf) $(DEMOFILES:.w=.pdf)
 
 help:
 	@ echo "First 'make tests';"
@@ -155,7 +164,7 @@ doc:
 
 clean:
 	rm -f *~ *.o *.c *.h libgb.a certified \
-	         *.tex *.log *.dvi *.toc *.idx *.scn core
+	         *.tex *.log *.dvi *.toc *.idx *.scn core *.pdf
 
 veryclean: clean
 	rm -f $(DEMOS)
@@ -175,3 +184,5 @@ fullfloppy: $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
 
 fulltar: $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
 	tar cvf sgb.tar $(ALL) ERRATA ANSI AMIGA PROTOTYPES MSVC
+
+pdfs: $(PDFS)
