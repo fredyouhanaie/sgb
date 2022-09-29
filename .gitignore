@@ -1,0 +1,14 @@
+*.c
+*.dvi
+*.h
+*.idx
+*.log
+*.o
+*.pdf
+*.scn
+*.tex
+*.toc
+*~
+certified
+core
+libgb.a
