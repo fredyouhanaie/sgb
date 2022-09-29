@@ -8,7 +8,7 @@
 #   current directory. (Not recommended for serious users.)
 
 #   Change SGBDIR to the directory where all GraphBase files will go:
-SGBDIR = /usr/local/sgb
+SGBDIR = $(HOME)/.local/share/sgb
 
 #   Change DATADIR to the directory where GraphBase data files will go:
 DATADIR = $(SGBDIR)/data
@@ -17,13 +17,13 @@ DATADIR = $(SGBDIR)/data
 INCLUDEDIR = $(SGBDIR)/include
 
 #   Change LIBDIR to the directory where GraphBase library routines will go:
-LIBDIR = /usr/local/lib
+LIBDIR = $(SGBDIR)/lib
 
 #   Change BINDIR to the directory where installdemos will put demo programs:
-BINDIR = /usr/local/bin
+BINDIR = $(SGBDIR)/bin
 
 #   Change CWEBINPUTS to the directory where CWEB include files will go:
-CWEBINPUTS = /usr/local/lib/cweb
+CWEBINPUTS = $(SGBDIR)/lib/cweb
 
 #   SHORTCUT: Uncomment these lines, for single-directory installation:
 #DATADIR = .
